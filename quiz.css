@@ -1,9 +1,25 @@
 body {
     background-color: lightcyan;
 }
+#score {
+    font-size: 22px;
+    margin: 10% auto;
+    text-align: center;
+    color: black;
+    letter-spacing: 10px;
+}
+
+#timer {
+    margin: 10% auto;
+    background-color: lightslategray;
+    font-size: 22px;
+    text-align: center;
+    color:black;
+    letter-spacing: 10px;
+}
 
 .grid {
-    width: 600px;
+    width: 700px;
     height: 500px;
     margin: 50px auto;
     background-color: white;
