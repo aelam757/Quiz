@@ -9,33 +9,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="quiz.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     
 </head>
 
 <body>
     <div class="grid">
-        <div class="container" id="top-container">
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <p id="score"></p>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <p id="timer"></p>
-                </div>
-            </div>
-        </div>
             <h1>Bootcamp Quiz</h1>
                 <hr style="margin-bottom: 50px">
 
-                <p id="question"></p>
+                <div id="question"></div>
 
-                <div class="buttons">
-                    <button id="btn0"><span id="choice0"></span></button>
-                    <button id="btn1"><span id="choice1"></span></button>
-                    <button id="btn2"><span id="choice2"></span></button>
-                    <button id="btn3"><span id="choice3"></span></button>
+                <div class="choiceList" class="quizMessage" class="answer">
+                    <button id="btn0"></button>
+                    <button id="btn1"></button>
+                    <button id="btn2"></button>
+                    <button id="btn3"></button>
                 </div>
+                <br>
+                <button class = "nextBtn">Next Question</button>
 
                 <hr style="margin-top: 50px">
                 <footer>
