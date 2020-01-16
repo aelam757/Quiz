@@ -1,4 +1,5 @@
 var questions = [{
+
     question: "1.What is the language that describes the style of an HTML document?",
     choices: ["CSS", "AJAX", "PYTHON", "SQL"],
     answer: 0
@@ -37,7 +38,7 @@ $(document).ready(function () {
 
     //Question Display
     displayCurrentQuestion();
-    $(this).find(".quizMessage").hide();
+    $(this).find(".question").hide();
 
     timedCount();
 
