@@ -2,11 +2,12 @@ let currentQuestion = 0;
 let viewingAn = 0;
 let correctAnswer = 0;
 let quizOver = false;
-let SelectedAnswer = [];
 let c = 195;
 let t;
 let choicesList = $(this).siblings("#choiceList");
 let questionClass = $(this).siblings("#question");
+let answer = $(this).siblings(".answer");
+let timer = document.getElementById("timer")
 
 $(document).ready(function () {
 
@@ -47,9 +48,12 @@ $(document).ready(function () {
 
     function displayCurrentQuestion() {
         $("#question").text(questions[currentQuestion].question);
+        console.log(questions)
     }
     function displaychoicesList(){
-        $("#choiceList").text(SelectedAnswer[currentQuestion]);
+        $("#choiceList").text(choiceList[currentQuestion],".answer");
+        console.log(choicesList)
+        console.log(answer)
     }
 
     
@@ -67,11 +71,7 @@ $(document).ready(function () {
     
     function hideScore() {
         $(document).find(".answer");
-    }
-    
-
-
-    if (!quizOver) {
+    }if (!quizOver) {
         if (currentQuestion == 0) { return false; }
 
         currentQuestion--;
@@ -150,6 +150,7 @@ function timeCount() {
         quizOver = true;
         return false;
     }
+    timeCount();   
 }
 
 if (c == 0) {
