@@ -1,31 +1,3 @@
-var questions = [{
-
-    question: "1.What is the language that describes the style of an HTML document?",
-    choices: ["CSS", "AJAX", "PYTHON", "SQL"],
-    answer: 0
-},
-{
-    question: "2.What is the programming language of HTML and the Web?",
-    choices: ["Bootstrap", "HTML", "CSS", "JavaScript"],
-    answer: 3
-},
-{
-    question: "3.What is the most popular HTML,CSS, and Javascript framework?",
-    choices: ["jQuery", "Bootstrap", "PHP", "SQ"],
-    answer: 1
-},
-{
-    question: "4.What greatly simplifies Javascript programming?",
-    choices: ["HTML", "CSS", "jQuery", "Bootstrap"],
-    answer: 2
-},
-{
-    question: "5.What is the worlds largest web developer site?",
-    choices: ["w3schools", "Stack Overflow", "GitLab", "Github"],
-    answer: 0
-},
-];
-
 let currentQuestion = 0;
 let viewingAn = 0;
 let correctAnswer = 0;
@@ -33,14 +5,70 @@ let quizOver = false;
 let SelectedAnswer = [];
 let c = 195;
 let t;
+let choicesList = $(this).siblings("#choiceList");
+let questionClass = $(this).siblings("#question");
 
 $(document).ready(function () {
 
-    //Question Display
-    displayCurrentQuestion();
-    $(this).find(".question").hide();
+    let questions = [{
 
-    timedCount();
+        question: "1.What is the language that describes the style of an HTML document?",
+        choices: ["CSS", "AJAX", "PYTHON", "SQL"],
+        answer: 0
+    },
+    {
+        question: "2.What is the programming language of HTML and the Web?",
+        choices: ["Bootstrap", "HTML", "CSS", "JavaScript"],
+        answer: 3
+    },
+    {
+        question: "3.What is the most popular HTML,CSS, and Javascript framework?",
+        choices: ["jQuery", "Bootstrap", "PHP", "SQ"],
+        answer: 1
+    },
+    {
+        question: "4.What greatly simplifies Javascript programming?",
+        choices: ["HTML", "CSS", "jQuery", "Bootstrap"],
+        answer: 2
+    },
+    {
+        question: "5.What is the worlds largest web developer site?",
+        choices: ["w3schools", "Stack Overflow", "GitLab", "Github"],
+        answer: 0
+    },
+    ];
+    
+
+    displayCurrentQuestion();
+    //$(this).find(".question");
+    resetQuiz();
+    displayScore();
+    displaychoicesList()
+
+    function displayCurrentQuestion() {
+        $("#question").text(questions[currentQuestion].question);
+    }
+    function displaychoicesList(){
+        $("#choiceList").text(SelectedAnswer[currentQuestion]);
+    }
+
+    
+    function resetQuiz()
+    {
+        currentQuestion = 0;
+        correctAnswer = 0;
+        hideScore();
+    }
+    
+    function displayScore() {
+        $(document).find(".grid > .answer").text("Your Score: " + correctAnswer + "Out of: " + questions.length);
+        $(document).find(".grid > .answer").show();
+    }
+    
+    function hideScore() {
+        $(document).find(".answer");
+    }
+    
 
 
     if (!quizOver) {
@@ -99,7 +127,6 @@ $(this).find(".nextBtn").on("click", function () {
         resetQuiz();
         viewingAn = 0;
         displayCurrentQuestion();
-        hide();
     }
 });
 
@@ -143,7 +170,7 @@ if (c == 0) {
             c = 25;
             $(document).find(".nextBtn").text("Play Again?");
             quizOver = true;
-            return false;
+            //return false;
         }
 
     }
@@ -157,22 +184,16 @@ if (c == 0) {
 }
 c = c - 1;
 t = setTimeout(function () {
-    timedCount()
 }, 1000);
 
 
 // This is the function for the quetions and choices
-function displayCurrentQuestion() {
-    if (c == 200) { c = 195; timedCount(); }
-    let question = questions[currentQuestion].question;
-    let questionClass = $(document).find(".grid > .question");
-    let choiceList = $(document).find(".grid > .question");
-    let numbChoices = questions[currentQuestion].choices.length;
-    $(questionClass).text(question);
-    let choice;
-}
 
-function resetQuiz();
+//function displayCurrentQuestion() {
+    //$("#question").text(questions[currentQuestion].question);
+//}
+
+function resetQuiz()
 {
     currentQuestion = 0;
     correctAnswer = 0;
@@ -185,21 +206,13 @@ function displayScore() {
 }
 
 function hideScore() {
-    $(dcoument).find(".answer").hide();
+    $(dcoument).find(".answer");
 }
 
 // Display the current question and choices
 function viewResults() {
     if (currentQuestion == 20) { currentQuestion = 0; return false; }
     if (viewingAn == 1) { return false; }
-
-    hideScore();
-    let question = questions[currentQuestion].question;
-    let questionClass = $(document).find(".grid > .question");
-    let choicesList = $(document).find(".grid > .choiceList");
-    let numbChoices = questions[currentQuestion].choices.length;
-    $(questionClass).text(question);
-    let choice;
 
     currentQuestion++;
 
