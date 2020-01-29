@@ -9,10 +9,11 @@ let questionClass = $(this).siblings("#question");
 let answer = $(this).siblings(".answer");
 let timer = document.getElementById("timer")
 
+
 $(document).ready(function () {
 
     let questions = [{
-
+    
         question: "1.What is the language that describes the style of an HTML document?",
         choices: ["CSS", "AJAX", "PYTHON", "SQL"],
         answer: 0
@@ -44,18 +45,27 @@ $(document).ready(function () {
     //$(this).find(".question");
     resetQuiz();
     displayScore();
-    displaychoicesList()
-
+    displaychoicesList();
+    displayingAnswer();
+    
     function displayCurrentQuestion() {
         $("#question").text(questions[currentQuestion].question);
         console.log(questions)
     }
+    console.log(questions[currentQuestion].choices[0])
+   
     function displaychoicesList(){
         $("#choiceList").text(choiceList[currentQuestion],".answer");
         console.log(choicesList)
         console.log(answer)
     }
-
+    function displayingAnswer(){
+        $(".btn0").text(questions[currentQuestion].choices[0]);
+        $(".btn1").text(questions[currentQuestion].choices[1])
+        $(".btn2").text(questions[currentQuestion].choices[2])
+        $(".btn3").text(questions[currentQuestion].choices[3])
+    }
+    
     
     function resetQuiz()
     {
@@ -85,114 +95,6 @@ $(document).ready(function () {
     }
 });
 
-$(this).find(".nextBtn").on("click", function () {
-    if (!quizOver) {
-        let val = $("input[type = 'radio']: checked").val();
-
-        if (val == undefined) {
-            $(document).find(".quizMessage").text("Please select a answer");
-            $(document).find(".quizMessage").show();
-        }
-        else {
-            //Remove message, not sure if I need to call this each time.
-            $(dcoument).find(".quizMessage").hide();
-            if (val == questions[currentQuestion].correctAnswer) {
-                correctAnswer++;
-            }
-            SelectedAnswer[currentQuestion] = val;
-
-            currentQuestion++;
-            if (currentQuestion >= 1) {
-            }
-            if (currentQuestion < questions.length) {
-                displayCurrentQuestion();
-            }
-            else {
-                displayScore();
-                $('#Timeshown').html('Time is UP!');
-                $('#timer').html("Your Score: " + correctAnswer + "Out of:" + questions.length);
-                c = 200;
-                $(document).find(".nextBtn").text("Play Again?");
-                quizOver = true;
-                return false;
-            }
-
-        }
-
-    }
-    else {
-        // Next button will restart the quiz("Play agian?")
-        quizOver = false; $('#TimeShown').html('TimeRemaing:'); SelectedAnswer = [];
-        $(document).find(".nextBtn").text("Next Question");
-        resetQuiz();
-        viewingAn = 0;
-        displayCurrentQuestion();
-    }
-});
-
-
-function timeCount() {
-    if (c == 200) {
-        return false;
-    }
-
-    let minutes = parseInt(c / 60) % 50;
-    let seconds = c % 60;
-    let result = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-    $("#timer").html(result);
-
-    if (c == 0) {
-        displayScore();
-        $('#TimeShown').html('Time is UP!');
-        $('#timer').html("You scored: " + correctAnswer + "Out of: " + questions.length);
-        c = 195
-        $(document).find(".nextBtn").text("Play Again?");
-        quizOver = true;
-        return false;
-    }
-    timeCount();   
-}
-
-if (c == 0) {
-    if (!quizOver) {
-        let val = $("input[type= 'radio]:checked").val();
-        if (val == questions[currentQuestion].correctAnswer) {
-            correctAnswers++;
-        }
-        currentQuestion++;
-
-        if (currentQuestion < questions.length) {
-            displayCurrentQuestion();
-            c = 20;
-        }
-        else {
-            displayScore();
-            $('#timer').html('');
-            c = 25;
-            $(document).find(".nextBtn").text("Play Again?");
-            quizOver = true;
-            //return false;
-        }
-
-    }
-    else {
-        quizOver = false;
-        $(document).find(".nextBtn").text("Next Question");
-        resetQuiz();
-        displayCurrentQuestion();
-        hideScore();
-    }
-}
-c = c - 1;
-t = setTimeout(function () {
-}, 1000);
-
-
-// This is the function for the quetions and choices
-
-//function displayCurrentQuestion() {
-    //$("#question").text(questions[currentQuestion].question);
-//}
 
 function resetQuiz()
 {
