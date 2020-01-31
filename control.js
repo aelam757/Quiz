@@ -3,7 +3,7 @@ let score = 0;
 let quizOver = false;
 let choicesList = $("#choiceList");
 let answer = $(".answer");
-let timer = $("timer")
+let timer = $("timer");
 //let totalQuestions = questions.length;
 //let questions = 0;
 
@@ -36,103 +36,102 @@ $(document).ready(function () {
         answer: 0
     },
     ];
- //   for (var i = 0; i < questions.length; i++) {
-   //     var response = window.prompt(questions[i].question);
+    //   for (var i = 0; i < questions.length; i++) {
+    //     var response = window.prompt(questions[i].question);
     //    if (response == questions[i].answer)
-     //       score++;
-     //   alert("Correct!");
+    //       score++;
+    //   alert("Correct!");
     //} else {
     //    alert("Sorry that was incorrect!");
     //}
-    
+
 
     displayCurrentQuestion();
-    resetQuiz();
     displayScore();
     displaychoicesList();
-    displayingAnswer();
-    loadNextQuestion();
 
     function displayCurrentQuestion() {
         $("#question").text(questions[currentQuestion].question);
         console.log(questions)
     }
-    console.log(questions[currentQuestion].choices[0])
+    console.log(questions[currentQuestion].choices[0]);
 
     function displaychoicesList() {
         $("#choiceList").text(choiceList[currentQuestion], ".answer");
-        for(var i = 0; i < question.length; i++){
-            var response = window.questions(questions[i].question);
-            if (response == question[i].answer)
-            score++;
-            alert("Correct!");
-        } else{
-            alert("Sorry, that was incorrect!");
+        for (let i = 0; i < question.length; i++) {
+            let response = window.questions(questions[i].question);
+            if (response == question[i].answer) {
+                score++;
+                alert("Correct!");
+            } else {
+                alert("Sorry, that was incorrect!");
+            }
+            console.log(choicesList);
+            console.log(answer);
+            console.log(response);
         }
-        console.log(choicesList)
-        console.log(answer)
-    }
-    function displayingAnswer() {
-        $(".btn0").text(questions[currentQuestion].choices[0]);
-        $(".btn1").text(questions[currentQuestion].choices[1])
-        $(".btn2").text(questions[currentQuestion].choices[2])
-        $(".btn3").text(questions[currentQuestion].choices[3])
-    }
-    function loadNextQuestion() {
+        displaychoicesList();
+        function displaychoicesList() {
 
-    }
+            $(".btn0").text(questions[currentQuestion].choices[0]);
+            $(".btn1").text(questions[currentQuestion].choices[1]);
+            $(".btn2").text(questions[currentQuestion].choices[2]);
+            $(".btn3").text(questions[currentQuestion].choices[3]);
 
-    function resetQuiz() {
-        currentQuestion = 0;
-        correctAnswer = 0;
+            console.log(displaychoicesList);
+        }
+        displayselectedChoice();
+        function displayselectedChoice() {
+            
+
+        }
+
+
+        
+        loadNextQuestion();
+        function loadNextQuestion() {
+            
+
+        }
+        resetQuiz();
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+        }
+
         hideScore();
-    }
+        function hideScore() {
+            $(document).find(".answer");
+        } if (!quizOver) {
+            if (currentQuestion == 0) { return false; }
+
+            currentQuestion--;
+            if (currentQuestion < questions.length) {
+                displayCurrentQuestion();
+            }
+        } else {
+            if (answer == 0) { return false; }
+            currentQuestion = 0; answer = 0;
+            viewResults();
+        }
+    };
+
 
     function displayScore() {
-        $(document).find(".grid > .answer").text("Your Score: " + correctAnswer + "Out of: " + questions.length);
+        $(document).find(".grid > .answer").text("Your Score: " + score + "Out of: " + questions.length);
         $(document).find(".grid > .answer").show();
     }
 
-    function hideScore() {
-        $(document).find(".answer");
-    } if (!quizOver) {
-        if (currentQuestion == 0) { return false; }
+    // Display the current question and choices
+    function viewResults() {
+        if (currentQuestion == 20) { currentQuestion = 0; return false; }
+        if (answer == 1) { return false; }
 
-        currentQuestion--;
-        if (currentQuestion < questions.length) {
-            displayCurrentQuestion();
-        }
-    } else {
-        if (viewAns == 0) { return false; }
-        currentQuestion = 0; viewingAn = 0;
-        viewResults();
+        currentQuestion++;
+
+        setTimeout(function () {
+            viewResults();
+        }, 5000);
+
     }
 });
-
-
-function resetQuiz() {
-    currentQuestion = 0;
-    correctAnswer = 0;
-    hideScore();
-}
-
-function displayScore() {
-    $(document).find(".grid > .answer").text("Your Score: " + correctAnswer + "Out of: " + questions.length);
-    $(document).find(".grid > .answer").show();
-}
-
-function hideScore() {
-    $(dcoument).find(".answer");
-}
-
-// Display the current question and choices
-function viewResults() {
-    if (currentQuestion == 20) { currentQuestion = 0; return false; }
-    if (viewingAn == 1) { return false; }
-
-    currentQuestion++;
-
-    setTimeout(function () {
-        viewResults();
-    }, 5000);
-}
