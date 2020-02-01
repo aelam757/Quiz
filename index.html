@@ -18,28 +18,28 @@
 </head>
 
 <body>
-    <div class="grid">
-        <h1>Bootcamp Quiz</h1>
-        <th id="score">Score:</th>
-        <th id="timer">Time Left:</th>
-        <hr style="margin-bottom: 45px">
+    <div class="container" id="main-div">
+        <div class="grid">
+            <button id="startButton">Begin Quiz</button>
+            <h1>Bootcamp Quiz</h1>
+            <p id="score">Score:</p>
+            <p id="timer">Time Left:</p>
+            <hr style="margin-bottom: 45px">
 
-        <div id="question"></div>
+            <div id="question" class="hide"></div>
 
-        <div id="choiceList" class= "quizMessage" class="answer">
-            <button class="btn0"></button>
-            <button class="btn1"></button>
-            <button class="btn2"></button>
-            <button class="btn3"></button>
-            <br>
-            <button class="nextBtn">Next Question</button>
+            <div id="choiceList" class="hide" class="answer">
+                <button class="btn0 choice"></button>
+                <button class="btn1 choice"></button>
+                <button class="btn2 choice"></button>
+                <button class="btn3 choice"></button>
+                <p id="rightorwrong"></p>
+                <br>
         </div>
-        <hr style="margin-top: 45px">
+            <hr style="margin-top: 45px">
         <footer>
             <th id="progress">Questions 1 of 5.</th>
         </footer>
-    </div>
-    </div>
     </div>
     <script src="control.js"></script>
 </body>

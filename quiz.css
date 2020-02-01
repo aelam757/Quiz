@@ -1,26 +1,9 @@
 body {
     background-color: lightcyan;
 }
-#score {
-    font-size: 22px;
-    margin: 10% auto;
-    text-align: center;
-    color: black;
-    letter-spacing: 10px;
-}
-
-#timer {
-    margin: 10% auto;
-    background-color: lightslategray;
-    font-size: 22px;
-    text-align: center;
-    color:black;
-    letter-spacing: 10px;
-}
-
 .grid {
     width: 700px;
-    height: 500px;
+    height: 525px;
     margin: 50px auto;
     background-color: white;
     padding: 25px 50px 50px 50px;
@@ -38,12 +21,6 @@ body {
     border-radius: 50px;
 }
 
-#score {
-    color: black;
-    text-align: center;
-    font-size: 30px;
-}
-
 .grid #questions {
     font-size: 30px;
     color: black;
@@ -58,12 +35,13 @@ body {
 
 .btn0, .btn1, .btn2, .btn3 {
     background-color: lightsteelblue;
+    position: relative;
     width: 250px;
     font-size: 20px;
     color: black;
     border: 1px solid darkgrey;
     border-radius: 50px;
-    margin: 10px 40px 10px 0px;
+    margin: 15px 15px 10px 10px;
 }
 .btn0:hover, .btn1:hover, .btn2:hover, .btn3:hover{
     background-color:white;
@@ -71,23 +49,19 @@ body {
 .btn0:focus, .btn1:focus, .btn2:focus, .btn3:focus{
     outline:0;
 }
-.nextBtn{
-    background-color: lightsteelblue;
-    width: 200px;
-    font-size: 20px;
-    color: black;
-    border: 1px solid darkgrey;
-    border-radius: 50px;
-    margin: 10px 40px 10px 0px;
-
-}
-.nextBtn:hover{
-    background-color:white;
-}
-.nextBtn:focus{
-    outline:0;
-}
 #progress {
     color: black;
     font-size: bold 20px;
+}
+#startButton {
+    width: 700px;
+    height: 525px;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-size: 2rem;
+    letter-spacing: 5px;
+    display: flex;
+    justify-content: center;
+    outline: none;
+    position: relative;
 }
