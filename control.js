@@ -54,15 +54,12 @@ function showQuestion() {
 
   questionContainer.append(choicesWrapper);
 
-  // var correctAnswerMsg = $('<div class="answerMsg"></div>');
-  // correctAnswerMsg.text("Correct!");
 
-  // questionContainer.append(correctAnswerMsg);
 
   $("#root").append(questionContainer);
 }
 
-// Added but not working
+
 function showEndGame() {
   let endGameMsg = $('<div class="endGameDiv"></div>');
   endGameMsg.text("Game Over!");
@@ -72,10 +69,9 @@ function startQuiz() {
   $("#start-quiz-message").remove();
   setInterval(tickTimer, 1000);
   showQuestion();
-  // $(".answerMsg").remove();
 
-  //Start the time
-  //Show the first question
+  //Start the timer!
+  //Show the first question!
 }
 
 function tickTimer() {
@@ -90,12 +86,11 @@ function tickTimer() {
     }
   }
 }
-
+// select a answer!
 function answerQuestion(selectedAnswer) {
   let selectedAnswerText = questions[currentQuestion].choices[selectedAnswer];
 
   if (selectedAnswerText === questions[currentQuestion].answer) {
-    // $(".answerMsg").text(correctAnswerMsg);
     console.log("correct");
     currentQuestion++;
     $(".question").remove();
@@ -117,7 +112,7 @@ function answerQuestion(selectedAnswer) {
     $("#timer").text(remainingTime);
   }
 }
-
+//Highscore!
 function highestScorebutton() {
   let initials = $(".initials").val();
 
@@ -153,3 +148,4 @@ function endQuiz() {
   endGameMsg.append(textBox);
   $("#root").append(endGameMsg);
 }
+// I finally FINISHED!!
