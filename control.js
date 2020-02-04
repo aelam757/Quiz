@@ -1,171 +1,155 @@
-let startButton = document.getElementById('startButton')
-let currentQuestion = 0;
+let remainingTime = 75;
+
+let penaltyTime = 10;
+
 let score = 0;
-let quizOver = false;
-let choicesList = $("#choiceList");
-let answer = $(".answer");
-let timer = $("timer");
-//let totalQuestions = questions.length;
-//let questions = 0;
+
+let correctAnswerPoints = 1;
+
+let currentQuestion = 0;
+
+let endScoreMsg;
+
+let gameIsOver = false;
 
 $(document).ready(function() {
-  let questions = [
-    {
-      question:
-        "1.What is the language that describes the style of an HTML document?",
-      choices: ["CSS", "AJAX", "PYTHON", "SQL"],
-      answer: 0
-    },
-    {
-      question: "2.What is the programming language of HTML and the Web?",
-      choices: ["Bootstrap", "HTML", "CSS", "JavaScript"],
-      answer: 3
-    },
-    {
-      question:
-        "3.What is the most popular HTML,CSS, and Javascript framework?",
-      choices: ["jQuery", "Bootstrap", "PHP", "SQ"],
-      answer: 1
-    },
-    {
-      question: "4.What greatly simplifies Javascript programming?",
-      choices: ["HTML", "CSS", "jQuery", "Bootstrap"],
-      answer: 2
-    },
-    {
-      question: "5.What is the worlds largest web developer site?",
-      choices: ["w3schools", "Stack Overflow", "GitLab", "Github"],
-      answer: 0
-    }
-  ];
-  $("#startButton").on('click', function(){
-    startButton.setAttribute("style", "display: none")
-    displayCurrentQuestion();
-    setTime();  
+  $("#start-bt").click(function() {
+    startQuiz();
+  });
 });
-let gameOverSwitch = 0;
-let countdown = 60;
-function setTime() {
-  let timerInterval = setInterval(
-    function() {
-      countdown--;
-      timer.innerText = countdown + " seconds left.";
-      if (countdown === 0) {
-        clearInterval(timerInterval)
-        timer.textContent = ""
-        gameOver();
-        alert("Time has run out!")
-      }
-      if (gameOverSwitch === 1){
-        clearInterval(timerInterval)
-        timer.textContent = ""
-      }
-    }, 1000);
+
+function showQuestion() {
+  let questionContainer = $('<div class="question"></div>');
+
+  let question = $('<div class="title"></div>');
+  question.text(questions[currentQuestion].question);
+
+  questionContainer.append(question);
+
+  let choicesWrapper = $('<div class="choices-wrapper"></div>');
+
+  let firstChoice = $(
+    '<button onclick="answerQuestion(0)" type="button" class="btn btn-primary choice" data-toggle="button" aria-pressed="false" style="background-color: indigo; border-color: indigo; ;"></button>'
+  );
+  firstChoice.text(questions[currentQuestion].choices[0]);
+  choicesWrapper.append(firstChoice);
+
+  let secondChoice = $(
+    '<button onclick="answerQuestion(1)" type="button" class="btn btn-primary choice" data-toggle="button" aria-pressed="false" style="background-color: indigo; border-color: indigo; ;"></button>'
+  );
+  secondChoice.text(questions[currentQuestion].choices[1]);
+  choicesWrapper.append(secondChoice);
+
+  let thirdChoice = $(
+    '<button onclick="answerQuestion(2)" type="button" class="btn btn-primary choice" data-toggle="button" aria-pressed="false" style="background-color: indigo; border-color: indigo; ;"></button>'
+  );
+  thirdChoice.text(questions[currentQuestion].choices[2]);
+  choicesWrapper.append(thirdChoice);
+
+  let fourthChoice = $(
+    '<button onclick="answerQuestion(3)" type="button" class="btn btn-primary choice" data-toggle="button" aria-pressed="false" style="background-color: indigo; border-color: indigo; ;"></button>'
+  );
+  fourthChoice.text(questions[currentQuestion].choices[3]);
+  choicesWrapper.append(fourthChoice);
+
+  questionContainer.append(choicesWrapper);
+
+  // var correctAnswerMsg = $('<div class="answerMsg"></div>');
+  // correctAnswerMsg.text("Correct!");
+
+  // questionContainer.append(correctAnswerMsg);
+
+  $("#root").append(questionContainer);
 }
-  displayCurrentQuestion();
-  displayScore();
-  displaychoicesList();
 
-  function displayCurrentQuestion() {
-    $("#question").text(questions[currentQuestion].question);
-    console.log(questions);
-  }
-  console.log(questions[currentQuestion].choices[0]);
+// Added but not working
+function showEndGame() {
+  let endGameMsg = $('<div class="endGameDiv"></div>');
+  endGameMsg.text("Game Over!");
+}
 
-  function displaychoicesList() {
-    $("#choiceList").text(choiceList[currentQuestion], ".answer");
-    for (let i = 0; i < question.length; i++) {
-      let response = window.questions(questions[i].question);
-      if (response == question[i].answer) {
-        score++;
-        alert("Correct!");
-      } else {
-        alert("Sorry, that was incorrect!");
-      }
-      console.log(choicesList);
-      console.log(answer);
-      console.log(response);
-    }
-    displaychoicesList();
-    function displaychoicesList() {
-      $(".btn0").text(questions[currentQuestion].choices[0]);
-      $(".btn1").text(questions[currentQuestion].choices[1]);
-      $(".btn2").text(questions[currentQuestion].choices[2]);
-      $(".btn3").text(questions[currentQuestion].choices[3]);
+function startQuiz() {
+  $("#start-quiz-message").remove();
+  setInterval(tickTimer, 1000);
+  showQuestion();
+  // $(".answerMsg").remove();
 
-      console.log(displaychoicesList);
-    }
-    displayselectedChoice();
-    function displayselectedChoice() {}
+  //Start the time
+  //Show the first question
+}
 
-    loadNextQuestion();
-    function loadNextQuestion() {}
-    resetQuiz();
-    function resetQuiz() {
-      currentQuestion = 0;
-      score = 0;
-    }
-
-    hideScore();
-    function hideScore() {
-      $(document).find(".answer");
-    }
-    if (!quizOver) {
-      if (currentQuestion == 0) {
-        return false;
-      }
-
-      currentQuestion--;
-      if (currentQuestion < questions.length) {
-        displayCurrentQuestion();
-      }
+function tickTimer() {
+  if (gameIsOver === false) {
+    if (remainingTime > 0) {
+      remainingTime--;
+      $("#timer").text(remainingTime);
     } else {
-      if (answer == 0) {
-        return false;
-      }
-      currentQuestion = 0;
-      answer = 0;
-      viewResults();
+      $(".question").remove();
+      gameIsOver = true;
+      endQuiz();
     }
   }
+}
 
-  $('.choice').on('click', function() {
-      var answer = $(this).text();
-      console.log(answer);
-      checkAnswer(answer);
-  })
+function answerQuestion(selectedAnswer) {
+  let selectedAnswerText = questions[currentQuestion].choices[selectedAnswer];
 
-  function checkAnswer(answer) {
-      var index = questions[currentQuestion].choices.indexOf(answer);
-      var correctAnswer = questions[currentQuestion].answer;
-      if (index === correctAnswer) {
-          $('#rightorwrong').text()
-      }
-  }
-
-  function displayScore() {
-    $(document)
-      .find(".grid > .answer")
-      .text("Your Score: " + score + "Out of: " + questions.length);
-    $(document)
-      .find(".grid > .answer")
-      .show();
-  }
-
-  // Display the current question and choices
-  function viewResults() {
-    if (currentQuestion == 20) {
-      currentQuestion = 0;
-      return false;
-    }
-    if (answer == 1) {
-      return false;
-    }
-
+  if (selectedAnswerText === questions[currentQuestion].answer) {
+    // $(".answerMsg").text(correctAnswerMsg);
+    console.log("correct");
     currentQuestion++;
-
-    setTimeout(function() {
-      viewResults();
-    }, 5000);
+    $(".question").remove();
+    if (questions.length === currentQuestion) {
+      gameIsOver = true;
+      endQuiz();
+    } else {
+      showQuestion();
+    }
+  } else {
+    remainingTime -= penaltyTime;
+    if (remainingTime <= 0) {
+      remainingTime = 0;
+      gameIsOver = true;
+      endQuiz();
+    } else {
+      console.log("incorrect");
+    }
+    $("#timer").text(remainingTime);
   }
-});
+}
+
+function highestScorebutton() {
+  let initials = $(".initials").val();
+
+  let newHighScore = {
+    name: initials,
+    score: remainingTime
+  };
+
+  let highScores = localStorage.getItem("highScores");
+
+  if (highScores === null) {
+    highScores = [];
+  } else {
+    highScores = JSON.parse(highScores);
+  }
+
+  highScores.push(newHighScore);
+
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+}
+
+function endQuiz() {
+  let endGameMsg = $('<div class="endGameDiv"></div>');
+  endGameMsg.html("Game Over!<br>Your score is: " + remainingTime + "<br>");
+
+  let highestScorebutton = $(
+    '<button onclick="highestScorebutton()" type="button" class="btn btn-primary choice" data-toggle="button" aria-pressed="false" style="background-color: indigo; border-color: indigo; ;">Submit</button>'
+  );
+
+  let textBox = $('<input type="text" class= "initials"/>');
+
+  endGameMsg.append(highestScorebutton);
+  endGameMsg.append(textBox);
+  $("#root").append(endGameMsg);
+}
